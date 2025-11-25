@@ -1,5 +1,5 @@
 """
-URL configuration for apiBlog project.
+URL configuration for ConcessionaireData project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -15,13 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-#apiBlog/urls.py
+#ConcessionaireData/urls.py
 
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('blogData.urls')),
+    path('api/', include('ConcessionaireData.urls')),
     path('api/', include('authentication.urls'))
 ]

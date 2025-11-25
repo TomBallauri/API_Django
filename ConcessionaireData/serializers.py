@@ -1,22 +1,22 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField, PrimaryKeyRelatedField
-from .models import Article, Comment, Concessionnaire, Vehicule
+from .models import Product, Comment, Concessionnaire, Vehicule
 
 
-class ArticleListSerializer(ModelSerializer):
+class ProductListSerializer(ModelSerializer):
     author = StringRelatedField(read_only=True)
     class Meta:
-        model = Article
+        model = Product
         fields = ['id', 'title', 'author', 'created_at', 'updated_at']
 
-class ArticleDetailSerializer(ModelSerializer):
+class ProductDetailSerializer(ModelSerializer):
     class Meta:
-        model = Article
+        model = Product
         fields = ['id', 'title', 'content']
 
 class CommentSerializer(ModelSerializer):
     # Les champs en lecture seule car ils sont gérés automatiquement
     author = StringRelatedField(read_only=True)
-    article = PrimaryKeyRelatedField(read_only=True)
+    Product = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment

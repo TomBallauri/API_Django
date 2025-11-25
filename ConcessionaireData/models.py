@@ -1,6 +1,5 @@
 from django.db.models import Model, CharField, TextField, DateTimeField, ForeignKey, CASCADE, IntegerField, DecimalField
-from django.core.validators import RegexValidator
-from apiBlog import settings
+from django.conf import settings
 
 TYPE_MOTO = 'moto'
 TYPE_AUTO = 'auto'
