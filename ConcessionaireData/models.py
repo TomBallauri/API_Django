@@ -28,7 +28,6 @@ class Comment(Model):
     date_mise_a_jour = DateTimeField(auto_now=True)
     produit = ForeignKey(Product, on_delete=CASCADE, related_name='commentaires')
 
-
 # Concessionnaire et Véhicule models
 class Concessionnaire(Model):
     nom = CharField(max_length=64)

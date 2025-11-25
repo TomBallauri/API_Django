@@ -5,9 +5,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_204_NO_CONTENT
 
-from ConcessionaireData.models import Product, Comment
+from ConcessionaireData.models import Product, Comment, Concessionnaire, Vehicule
 from ConcessionaireData.permission import IsCommentAuthorOrAdminWithin24h, IsAuthorOrAdmin
-from ConcessionaireData.serializers import ProductListSerializer, ProductDetailSerializer, CommentSerializer
+from ConcessionaireData.serializers import (
+    ProductListSerializer,
+    ProductDetailSerializer,
+    CommentSerializer,
+    ConcessionnaireSerializer,
+    VehiculeSerializer,
+)
 
 
 # Create your views here.
@@ -102,3 +108,34 @@ class CommentDetailView(APIView):
             raise PermissionDenied(permission.message)
         comment.delete()
         return Response(status=HTTP_204_NO_CONTENT)
+
+
+#/Concessionnaire
+class ConcessionnaireListView(APIView):
+    def get(self, request):
+        qs = Concessionnaire.objects.all()
+        serializer = ConcessionnaireSerializer(qs, many=True)
+        return Response(serializer.data)
+
+#/Concessionnaire/<int:id>
+class ConcessionnaireDetailView(APIView):
+    def get(self, request, pk):
+        concessionnaire = get_object_or_404(Concessionnaire, pk=pk)
+        serializer = ConcessionnaireSerializer(concessionnaire)
+        return Response(serializer.data)
+
+
+class ConcessionnaireVehiculesListView(APIView):
+    def get(self, request, concessionnaire_pk):
+        concessionnaire = get_object_or_404(Concessionnaire, pk=concessionnaire_pk)
+        vehicules = concessionnaire.vehicules.all()
+        serializer = VehiculeSerializer(vehicules, many=True)
+        return Response(serializer.data)
+
+
+class ConcessionnaireVehiculeDetailView(APIView):
+    def get(self, request, concessionnaire_pk, pk):
+        concessionnaire = get_object_or_404(Concessionnaire, pk=concessionnaire_pk)
+        vehicule = get_object_or_404(Vehicule, pk=pk, concessionnaire=concessionnaire)
+        serializer = VehiculeSerializer(vehicule)
+        return Response(serializer.data)
