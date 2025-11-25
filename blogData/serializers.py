@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField, PrimaryKeyRelatedField
-from .models import Article, Comment
+from .models import Article, Comment, Concessionnaire, Vehicule
 
 
 class ArticleListSerializer(ModelSerializer):
@@ -21,3 +21,16 @@ class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+class VehiculeSerializer(ModelSerializer):
+    class Meta:
+        model = Vehicule
+        fields = '__all__'
+
+
+class ConcessionnaireSerializer(ModelSerializer):
+    # Expose tous les champs sauf `siret` (doit rester en base mais non accessible via l'API)
+    class Meta:
+        model = Concessionnaire
+        fields = ['id', 'nom']

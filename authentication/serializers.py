@@ -9,7 +9,6 @@ class AuthorUserSerializer(ModelSerializer):
         fields = [
             "id",
             "username",
-            # "date_of_birth",
             "password",
         ]
         extra_kwargs = {

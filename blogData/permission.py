@@ -6,7 +6,7 @@ class IsAuthorOrAdmin(BasePermission):
     def has_object_permission(self, request, view, obj):
         return request.user == obj.author or request.user.is_staff
 
-class IsAdminForArticle(BasePermission):
+class IsAdminForProduct(BasePermission):
     def has_object_permission(self, request, view, obj):
         return request.user.is_staff
 
