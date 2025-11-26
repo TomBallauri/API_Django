@@ -12,7 +12,7 @@ TYPE_CHOICES = [
 # Create your models here.
 class Product(Model):
     titre = CharField(max_length=512)
-    type_vehicule = CharField(max_length=4, choices=TYPE_CHOICES)
+    type = CharField(max_length=4, choices=TYPE_CHOICES)
     marque = CharField(max_length=64)
     image = CharField(max_length=256)
     chevaux = IntegerField()
@@ -43,7 +43,7 @@ class Concessionnaire(Model):
     )
 
 class Vehicule(Model):
-    type_vehicule = CharField(max_length=4, choices=TYPE_CHOICES)
+    type = CharField(max_length=4, choices=TYPE_CHOICES)
     marque = CharField(max_length=64)
     image = CharField(max_length=256)
     chevaux = IntegerField()

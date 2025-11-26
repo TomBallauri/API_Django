@@ -1,9 +1,11 @@
-from rest_framework.serializers import ModelSerializer, StringRelatedField, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, StringRelatedField, PrimaryKeyRelatedField, DateTimeField
 from .models import Product, Comment, Concessionnaire, Vehicule
 
 
 class ProductListSerializer(ModelSerializer):
     auteur = StringRelatedField(read_only=True)
+    date_creation = DateTimeField(read_only=True)
+    date_mise_a_jour = DateTimeField(read_only=True)
     class Meta:
         model = Product
         fields = ['id', 'titre', 'auteur', 'date_creation', 'date_mise_a_jour']
@@ -11,8 +13,8 @@ class ProductListSerializer(ModelSerializer):
 
 class ProductDetailSerializer(ModelSerializer):
     auteur = StringRelatedField(read_only=True)
-    date_creation = StringRelatedField(read_only=True)
-    date_mise_a_jour = StringRelatedField(read_only=True)
+    date_creation = DateTimeField(read_only=True)
+    date_mise_a_jour = DateTimeField(read_only=True)
 
     class Meta:
         model = Product

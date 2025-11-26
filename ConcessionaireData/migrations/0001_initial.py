@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('titre', models.CharField(max_length=512)),
-                ('type_vehicule', models.CharField(choices=[('moto', 'Moto'), ('auto', 'Auto')], max_length=4)),
+                ('type', models.CharField(choices=[('moto', 'Moto'), ('auto', 'Auto')], max_length=4)),
                 ('marque', models.CharField(max_length=64)),
                 ('image', models.CharField(max_length=256)),
                 ('chevaux', models.IntegerField()),
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
             name='Vehicule',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type_vehicule', models.CharField(choices=[('moto', 'Moto'), ('auto', 'Auto')], max_length=4)),
+                ('type', models.CharField(choices=[('moto', 'Moto'), ('auto', 'Auto')], max_length=4)),
                 ('marque', models.CharField(max_length=64)),
                 ('image', models.CharField(max_length=256)),
                 ('chevaux', models.IntegerField()),
