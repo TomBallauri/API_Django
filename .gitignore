@@ -1,8 +1,0 @@
-/.env/
-/.idea/
-/.__pycache__/
-/ConcessionaireData/migrations/
-/authentication/migrations/
-/ConcessionaireData/__pycache__/
-/authentication/__pycache__/
-/.vscode/
