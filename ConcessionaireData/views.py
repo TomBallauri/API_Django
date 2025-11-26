@@ -30,7 +30,7 @@ class ProductListView(APIView):
     def post(self, request):
         serializer = ProductDetailSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(author=request.user)
+            serializer.save(auteur=request.user)
             return Response(serializer.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
@@ -75,7 +75,7 @@ class CommentListCreateView(APIView):
         product = get_object_or_404(Product, pk=product_pk)
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(product=product, author=request.user)
+            serializer.save(produit=product, auteur=request.user)
             return Response(serializer.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 

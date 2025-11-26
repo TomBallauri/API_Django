@@ -3,20 +3,25 @@ from .models import Product, Comment, Concessionnaire, Vehicule
 
 
 class ProductListSerializer(ModelSerializer):
-    author = StringRelatedField(read_only=True)
+    auteur = StringRelatedField(read_only=True)
     class Meta:
         model = Product
-        fields = ['id', 'title', 'author', 'created_at', 'updated_at']
+        fields = ['id', 'titre', 'auteur', 'date_creation', 'date_mise_a_jour']
+
 
 class ProductDetailSerializer(ModelSerializer):
+    auteur = StringRelatedField(read_only=True)
+    date_creation = StringRelatedField(read_only=True)
+    date_mise_a_jour = StringRelatedField(read_only=True)
+
     class Meta:
         model = Product
-        fields = ['id', 'title', 'content']
+        fields = '__all__'
 
 class CommentSerializer(ModelSerializer):
     # Les champs en lecture seule car ils sont gérés automatiquement
-    author = StringRelatedField(read_only=True)
-    Product = PrimaryKeyRelatedField(read_only=True)
+    auteur = StringRelatedField(read_only=True)
+    produit = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment
