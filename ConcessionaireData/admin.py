@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from ConcessionaireData.models import Product, Comment
+from ConcessionaireData.models import Concessionnaire, Vehicule
 
 # Register your models here.
-admin.site.register(Product)
-admin.site.register(Comment)
+admin.site.register(Concessionnaire)
+admin.site.register(Vehicule)
