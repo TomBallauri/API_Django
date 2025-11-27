@@ -40,10 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'ConcessionaireData',
-    'authentication'
 ]
 
-AUTH_USER_MODEL = 'authentication.AuthorUser'
+AUTH_USER_MODEL = 'ConcessionaireData.AuthorUser'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (

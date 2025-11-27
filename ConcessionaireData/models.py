@@ -1,4 +1,5 @@
-from django.db.models import Model, CharField, DateTimeField, ForeignKey, CASCADE, IntegerField, DecimalField
+from django.db.models import Model, CharField, DateTimeField, ForeignKey, CASCADE, IntegerField, DecimalField, DateField
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 
 TYPE_MOTO = 'moto'
@@ -30,3 +31,7 @@ class Vehicule(Model):
 
     #Colonne rajouter pour lier concessionnaire et vehicule
     concessionnaire = ForeignKey(Concessionnaire, on_delete=CASCADE, null=True, related_name='vehicules')
+
+
+class AuthorUser(AbstractUser):
+    date_of_birth = DateField(null=True, blank=True)
