@@ -15,12 +15,13 @@ from .serializers import (
 #/Concessionnaire
 class ConcessionnaireListView(APIView):
 
-    # Laisse tout le monde lire, mais restreint les modifs aux admin
+    # Laisse tout le monde lire 
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
         return [IsAdminUser()]
 
+    #Post un concessionnaire spécifique seulement possible par un admin
     def get(self, request):
         qs = Concessionnaire.objects.all()
         serializer = ConcessionnaireSerializer(qs, many=True)
@@ -37,12 +38,13 @@ class ConcessionnaireListView(APIView):
 #/Concessionnaire/<int:id>
 class ConcessionnaireDetailView(APIView):
 
-    # Laisse tout le monde lire, mais restreint les modifs aux admin
+    # Laisse tout le monde lire
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
         return [IsAdminUser()]
 
+    #Put, Delete un concessionnaire spécifique seulement possible par un admin
     def get(self, request, pk):
         concessionnaire = get_object_or_404(Concessionnaire, pk=pk)
         serializer = ConcessionnaireSerializer(concessionnaire)
@@ -66,12 +68,13 @@ class ConcessionnaireDetailView(APIView):
 #/Concessionnaire/<int:id>/vehicules
 class ConcessionnaireVehiculesListView(APIView):
 
-    # Laisse tout le monde lire, mais restreint les modifs aux admin
+    # Laisse tout le monde lire
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
         return [IsAdminUser()]
 
+    # Post un véhicule spécifique d'un concessionnaire spécifique seulement possible par un admin
     def get(self, request, concessionnaire_pk):
         concessionnaire = get_object_or_404(Concessionnaire, pk=concessionnaire_pk)
         vehicules = concessionnaire.vehicules.all()
@@ -89,12 +92,13 @@ class ConcessionnaireVehiculesListView(APIView):
 #/Concessionnaire/<int:id>/vehicules/<int:pk>
 class ConcessionnaireVehiculeDetailView(APIView):
 
-    # Laisse tout le monde lire, mais restreint les modifs aux admin
+    # Laisse tout le monde lire
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
         return [IsAdminUser()]
 
+    #Put, Delete d'un véhicule spécifique d'un concessionnaire spécifique seulement possible par un admin
     def get(self, request, concessionnaire_pk, pk):
         concessionnaire = get_object_or_404(Concessionnaire, pk=concessionnaire_pk)
         vehicule = get_object_or_404(Vehicule, pk=pk, concessionnaire=concessionnaire)

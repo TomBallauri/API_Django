@@ -27,4 +27,6 @@ class Vehicule(Model):
     image = CharField(max_length=256)
     chevaux = IntegerField()
     prix_ht = DecimalField(max_digits=12, decimal_places=2)
+
+    #Colonne rajouter pour lier concessionnaire et vehicule
     concessionnaire = ForeignKey(Concessionnaire, on_delete=CASCADE, null=True, related_name='vehicules')
