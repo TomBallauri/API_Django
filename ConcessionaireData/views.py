@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,7 +12,33 @@ from .serializers import (
 )
 from .serializers import AuthorUserSerializer
 from rest_framework.permissions import AllowAny
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
+
+class AuthorUserView(APIView):
+
+    # Laisse tout le monde créer un utilisateur
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [AllowAny()]
+        return [IsAdminUser()]
+
+    # Récupère tous les utilisateurs (seulement pour les admins)
+    def get(self, request):
+        User = get_user_model()
+        qs = User.objects.all()
+        serializer = AuthorUserSerializer(qs, many=True)
+        return Response(serializer.data)
+
+    # Crée un utilisateur
+    def post(self, request):
+        serializer = AuthorUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            out = AuthorUserSerializer(user)
+            return Response(out.data, status=HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
 #/Concessionnaire
 class ConcessionnaireListView(APIView):
 
@@ -35,21 +59,6 @@ class ConcessionnaireListView(APIView):
         if serializer.is_valid():
             inst = serializer.save()
             out = ConcessionnaireSerializer(inst)
-            return Response(out.data, status=HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-
-
-class AuthorUserView(APIView):
-    """POST /api/users/ : create a new user (public)."""
-    def get_permissions(self):
-        # only allow public POST to create user
-        return [AllowAny()]
-
-    def post(self, request):
-        serializer = AuthorUserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            out = AuthorUserSerializer(user)
             return Response(out.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 

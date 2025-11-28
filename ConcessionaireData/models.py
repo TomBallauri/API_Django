@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, DateTimeField, ForeignKey, CASCADE, IntegerField, DecimalField, DateField
+from django.db.models import Model, CharField, ForeignKey, CASCADE, IntegerField, DecimalField, DateField
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 

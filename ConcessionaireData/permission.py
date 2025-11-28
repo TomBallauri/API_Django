@@ -1,7 +1,4 @@
 from rest_framework.permissions import BasePermission
-from django.utils import timezone
-from datetime import timedelta
-
 
 # Classes de permission pour les modèles Concessionnaire et Véhicule
 class IsAdminForConcessionnaire(BasePermission):
