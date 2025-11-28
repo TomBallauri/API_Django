@@ -1,4 +1,4 @@
-La base SQLite est fourni avec 2 users : 
+Superuser logins :
 
-- userA (mot de passe **admin123**)
-- userB (mot de passe **test456**)
+user : root
+password : root
